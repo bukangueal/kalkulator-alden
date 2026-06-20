@@ -1,157 +1,369 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalkulator Denda & Sanksi by Alden Smith</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h2 { margin-bottom: 10px; }
-    .pelanggaran { margin-bottom: 10px; }
-    .pelanggaran label { margin-left: 8px; }
-    .total { margin-top: 20px; font-weight: bold; font-size: 18px; }
-    .button-container { margin-top: 20px; }
-    .option { margin-top: 10px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Dokumentasi ANC Bidan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        input[type="number"]::-webkit-inner-spin-button, 
+        input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        .form-section { @apply p-5 border-b border-slate-100 bg-white; }
+        .label-title { @apply block text-sm font-semibold text-slate-700 mb-1.5; }
+        .input-field { @apply w-full p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none text-sm transition; }
+    </style>
 </head>
-<body>
-  <h2>Kalkulator Denda & Sanksi by Alden Smith</h2>
+<body class="bg-slate-100 min-h-screen text-slate-800 font-sans pb-20">
 
-  <form id="formPelanggaran">
-    <!-- Pasal 1 -->
-    <h3>Pasal 1 - Pelanggaran Kendaraan</h3>
-<div class="pelanggaran"><input type="checkbox" data-denda="4000" data-sanksi="0" data-impound="2" data-persidangan="no"><label>1.1 Parkir sembarangan (4000$ + IMP 2 hari)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="2000" data-sanksi="0" data-impound="0" data-persidangan="no"><label>1.2 Tidak memakai helm atau seatbelt (2000$)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="2000" data-sanksi="0" data-impound="0" data-persidangan="no"><label>1.3 Berkendara tidak pada jalurnya (2000$)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="3000" data-sanksi="0" data-impound="0" data-persidangan="no"><label>1.4 Ugal-ugalan di jalan (3000$)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="15" data-impound="2" data-persidangan="no"><label>1.5 Mengikuti balap liar (5000$ + IMP 2 hari + 15 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="3000" data-sanksi="0" data-impound="1" data-persidangan="no"><label>1.6 Modifikasi ilegal pada kendaraan (3000$ + IMP 1 hari)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="0" data-impound="3" data-persidangan="no"><label>1.7 Kendaraan tidak ada plate (6000$ + IMP 3 hari)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="0" data-impound="0" data-persidangan="no"><label>1.8 Berkendara tidak memiliki SIM (5000$)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="3000" data-sanksi="0" data-impound="0" data-persidangan="no"><label>1.9 Berkendara dalam kondisi mengantuk (3000$)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="0" data-impound="0" data-persidangan="no"><label>1.10 Berkendara melebihi kecepatan 80km/jam (5000$)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="0" data-impound="0" data-persidangan="no"><label>1.11 Berkendara melebihi muatan atau penumpang (5000$)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="6000" data-sanksi="0" data-impound="3" data-persidangan="no"><label>1.12 Kendaraan berada di lokasi peperangan (7000$ + IMP 3 hari)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="4000" data-sanksi="0" data-impound="4" data-persidangan="no"><label>1.13 Kendaraan suspect (4000$ + IMP 4 hari)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="8000" data-sanksi="0" data-impound="4" data-persidangan="no"><label>1.14 Kendaraan berada di daerah terlarang (8000$ + IMP 4 hari)</label></div>
+    <nav class="bg-teal-700 text-white p-4 shadow-md sticky top-0 z-20">
+        <div class="max-w-2xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-user-nurse text-2xl"></i>
+                <h1 class="text-xl font-bold">E-Partograf & ANC</h1>
+            </div>
+            <span class="text-xs bg-teal-800 px-2 py-1 rounded">Versi Lengkap</span>
+        </div>
+    </nav>
 
+    <main class="max-w-2xl mx-auto mt-4 px-3 md:px-0">
+        <form id="ancForm" class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden">
+            
+            <div class="form-section bg-teal-50/30">
+                <h3 class="text-md font-bold text-teal-800 mb-3 flex items-center gap-2"><i class="fas fa-id-card"></i> Identitas & Subjektif (S)</h3>
+                <div class="grid grid-cols-3 gap-3 mb-3">
+                    <div class="col-span-2">
+                        <label class="label-title">Nama Pasien</label>
+                        <input type="text" id="nama" class="input-field" placeholder="Ny. ...">
+                    </div>
+                    <div>
+                        <label class="label-title">Umur (Th)</label>
+                        <input type="number" id="umur" class="input-field" placeholder="0">
+                    </div>
+                </div>
+                <div>
+                    <label class="label-title">Keluhan Utama</label>
+                    <input type="text" id="keluhan" class="input-field" placeholder="Mual, pusing, dll...">
+                </div>
+            </div>
 
-    <!-- Pasal 2 -->
-<h3>Pasal 2 - Pelanggaran Ringan</h3>
-<div class="pelanggaran"><input type="checkbox" data-denda="4000" data-sanksi="10" data-impound="0" data-persidangan="no"><label>2.1 Membawa minuman beralkohol (4000$ + 10 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="15" data-impound="0" data-persidangan="no"><label>2.2 Mengganggu ketertiban umum (5000$ + 15 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="0" data-impound="0" data-persidangan="no"><label>2.3 Tidak membawa kartu identitas (KTP) (5000$)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="20" data-impound="0" data-persidangan="no"><label>2.4 Telanjang / memakai topeng di area publik (5000$ + 20 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="4000" data-sanksi="10" data-impound="0" data-persidangan="no"><label>2.5 Pencemaran nama baik seseorang (3000$ + 10 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="6000" data-sanksi="20" data-impound="0" data-persidangan="no"><label>2.6 Menghancurkan kendaraan orang lain (6000$ + 20 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="8000" data-sanksi="15" data-impound="0" data-persidangan="no"><label>2.7 Perjudian/Taruhan (8000$ + 15 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="4000" data-sanksi="10" data-impound="0" data-persidangan="no"><label>2.8 Mabuk di area publik (4000$ + 10 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="25" data-impound="0" data-persidangan="no"><label>2.9 Melakukan kekerasan berupa pemukulan (5000$ + 25 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="8000" data-sanksi="30" data-impound="0" data-persidangan="no"><label>2.10 Mencoba menyuap petugas (8000$ + 30 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="6000" data-sanksi="15" data-impound="0" data-persidangan="no"><label>2.11 Menghancurkan properti orang lain (6000$ + 15 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="10" data-impound="0" data-persidangan="no"><label>2.12 Tindakan mengeksploitasi privasi orang lain (5000$ + 10 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="7000" data-sanksi="20" data-impound="0" data-persidangan="no"><label>2.13 Memberikan informasi palsu di 110 (7000$ + 20 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="8000" data-sanksi="30" data-impound="0" data-persidangan="no"><label>2.14 Menyembunyikan barang ilegal (8000$ + 30 bulan)</label></div>
+            <div class="form-section">
+                <h3 class="text-md font-bold text-teal-800 mb-3 flex items-center gap-2"><i class="fas fa-calendar-alt"></i> Riwayat Obstetri & UK</h3>
+                <div class="grid grid-cols-3 gap-3 mb-4">
+                    <div>
+                        <label class="label-title">Gravida (G)</label>
+                        <input type="number" id="gravida" class="input-field text-center" placeholder="G">
+                    </div>
+                    <div>
+                        <label class="label-title">Partus (P)</label>
+                        <input type="number" id="partus" class="input-field text-center" placeholder="P">
+                    </div>
+                    <div>
+                        <label class="label-title">Abortus (A)</label>
+                        <input type="number" id="abortus" class="input-field text-center" placeholder="A">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="label-title">HPHT</label>
+                        <input type="date" id="hpht" class="input-field">
+                    </div>
+                    <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                        <label class="label-title text-slate-500">Hasil Kalkulasi (Otomatis)</label>
+                        <div class="text-sm">
+                            HPL : <span id="hpl-result" class="font-bold text-teal-700">-</span><br>
+                            UK  : <span id="uk-result" class="font-bold text-teal-700">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="form-section bg-teal-50/30">
+                <h3 class="text-md font-bold text-teal-800 mb-3 flex items-center gap-2"><i class="fas fa-heartbeat"></i> TTV & Antropometri</h3>
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div>
+                        <label class="label-title">Tekanan Darah</label>
+                        <div class="flex items-center gap-2">
+                            <input type="number" id="sistolik" class="input-field text-center" placeholder="120">
+                            <span class="font-bold text-slate-400">/</span>
+                            <input type="number" id="diastolik" class="input-field text-center" placeholder="80">
+                        </div>
+                        <div id="td-status" class="text-xs mt-1 h-4"></div>
+                    </div>
+                    <div>
+                        <label class="label-title">Nadi / Suhu</label>
+                        <div class="flex items-center gap-2">
+                            <input type="number" id="nadi" class="input-field text-center" placeholder="80x">
+                            <span class="font-bold text-slate-400">|</span>
+                            <input type="number" id="suhu" class="input-field text-center" placeholder="36.5">
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Pasal 3 -->
-    <h3>Pasal 3 - Pelanggaran Sedang (A)</h3>
-    <div class="pelanggaran"><input type="checkbox" data-denda="9000" data-sanksi="20" data-impound="0" data-persidangan="no"><label>3.1 Menghina instansi secara lisan / tulisan (8000$ + 20 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="10000" data-sanksi="30" data-impound="0" data-persidangan="no"><label>3.2 Berada di zona merah / zona terlarang (10000$ + 30 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="20" data-impound="0" data-persidangan="no"><label>3.3 Pemakai / pecandu barang ilegal (5000$ + 20 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="12000" data-sanksi="30" data-impound="0" data-persidangan="no"><label>3.4 Menghilangkan barang bukti (12000$ + 30 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="25" data-impound="0" data-persidangan="no"><label>3.5 Menyerang petugas dengan sengaja (5000$ + 25 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="8000" data-sanksi="25" data-impound="0" data-persidangan="no"><label>3.6 Menyamar sebagai staf instansi (8000$ + 25 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="15000" data-sanksi="35" data-impound="0" data-persidangan="no"><label>3.7 Melawan petugas saat penangkapan (15000$ + 35 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="15" data-impound="0" data-persidangan="no"><label>3.8 Mengganggu petugas yang sedang bertugas (5000$ + 15 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="10000" data-sanksi="25" data-impound="0" data-persidangan="no"><label>3.9 Menodongkan senjata api ke pada orang lain (10000$ + 25 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="8000" data-sanksi="20" data-impound="0" data-persidangan="no"><label>3.10 Memberikan informasi palsu kepada petugas (8000$ + 20 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="10000" data-sanksi="30" data-impound="0" data-persidangan="no"><label>3.11 Melakukan perburuan ilegal (10000$ + 30 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="7000" data-sanksi="20" data-impound="0" data-persidangan="no"><label>3.12 Menghakimi orang tanpa prosedur yang sah (7000$ + 20 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="6000" data-sanksi="15" data-impound="0" data-persidangan="no"><label>3.13 Pembobolan kendaraan atau rumah (6000$ + 15 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="15000" data-sanksi="30" data-impound="0" data-persidangan="no"><label>3.14 Mengajak warga untuk melakukan demo (15000$ + 30 bulan)</label></div>
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label class="label-title">BB (kg)</label>
+                        <input type="number" id="bb" class="input-field">
+                    </div>
+                    <div>
+                        <label class="label-title">TB (cm)</label>
+                        <input type="number" id="tb" class="input-field">
+                    </div>
+                    <div>
+                        <label class="label-title">LILA (cm)</label>
+                        <input type="number" id="lila" step="0.1" class="input-field">
+                    </div>
+                </div>
+                <div id="gizi-status" class="text-xs mt-2 h-4 font-medium flex justify-between">
+                    <span id="imt-status"></span>
+                    <span id="lila-status"></span>
+                </div>
+            </div>
 
-    <!-- Pasal 4 -->
-    <h3>Pasal 4 - Pelanggaran Sedang (B)</h3>
-<div class="pelanggaran"><input type="checkbox" data-denda="10000" data-sanksi="30" data-impound="0" data-persidangan="no"><label>4.1 Membawa barang ilegal berupa kanabis &lt; 20 (10000$ + 30 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="15000" data-sanksi="40" data-impound="0" data-persidangan="no"><label>4.2 Membawa barang ilegal berupa kanabis &gt; 20 (15000$ + 40 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="15000" data-sanksi="30" data-impound="0" data-persidangan="no"><label>4.3 Membawa barang ilegal berupa marijuana &lt; 20 (15000$ + 30 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="20000" data-sanksi="40" data-impound="0" data-persidangan="no"><label>4.4 Membawa barang ilegal berupa marijuana &gt; 20 (20000$ + 40 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="12000" data-sanksi="25" data-impound="0" data-persidangan="no"><label>4.5 Membawa uang kotor / merah &lt; 5000$ (12000$ + 25 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="18000" data-sanksi="35" data-impound="0" data-persidangan="no"><label>4.6 Membawa uang kotor / merah &gt; 5000$ (18000$ + 35 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="15000" data-sanksi="30" data-impound="0" data-persidangan="no"><label>4.7 Berada di tempat produksi obat terlarang (15000$ + 30 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="18000" data-sanksi="30" data-impound="0" data-persidangan="no"><label>4.8 Menjual belikan obat-obatan terlarang (18000$ + 30 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="25000" data-sanksi="40" data-impound="0" data-persidangan="no"><label>4.9 Menjual belikan senjata api kepada orang lain (25000$ + 40 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="12000" data-sanksi="25" data-impound="0" data-persidangan="no"><label>4.10 Memperlihatkan senjata di area publik (12000$ + 25 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="5000" data-sanksi="20" data-impound="0" data-persidangan="no"><label>4.11 Pecandu/pengguna obat-obatan terlarang (5000$ + 20 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="40000" data-sanksi="50" data-impound="0" data-persidangan="no"><label>4.12 Melakukan tindakan perampokan warung (40000$ + 50 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="25000" data-sanksi="35" data-impound="0" data-persidangan="no"><label>4.13 Melakukan tindakan perampokan ATM (25000$ + 35 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="55000" data-sanksi="70" data-impound="0" data-persidangan="no"><label>4.14 Melakukan perampokan bank besar (55000$ + 70 bulan)</label></div>
+            <div class="form-section">
+                <h3 class="text-md font-bold text-teal-800 mb-3 flex items-center gap-2"><i class="fas fa-baby"></i> Pemeriksaan Kebidanan</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                    <div>
+                        <label class="label-title">TFU (cm)</label>
+                        <input type="number" id="tfu" class="input-field" placeholder="0">
+                    </div>
+                    <div class="col-span-2">
+                        <label class="label-title">Status Kepala (PAP)</label>
+                        <select id="pap" class="input-field bg-white">
+                            <option value="12">Belum masuk PAP / Goyang (12)</option>
+                            <option value="11">Sudah masuk PAP (11)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="label-title">TBJ (gram)</label>
+                        <input type="text" id="tbj" readonly class="input-field bg-slate-100 font-bold text-teal-700 text-center" placeholder="-">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="label-title">Presentasi</label>
+                        <select id="presentasi" class="input-field bg-white">
+                            <option value="Kepala">Kepala (LetKep)</option>
+                            <option value="Bokong">Bokong (LetSu)</option>
+                            <option value="Lintang">Lintang (LetLi)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="label-title">DJJ (x/menit)</label>
+                        <input type="number" id="djj" class="input-field" placeholder="120-160">
+                    </div>
+                </div>
+            </div>
 
-    <!-- Pasal 5 -->
-    <h3>Pasal 5 - Pelanggaran Berat</h3>
-<div class="pelanggaran"><input type="checkbox" data-denda="10000" data-sanksi="30" data-impound="0" data-persidangan="no"><label>5.1 Membawa senjata ilegal &lt;40 ammo (RIFLE, SLC, DE) (10000$ + 30 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="15000" data-sanksi="40" data-impound="0" data-persidangan="no"><label>5.2 Membawa senjata ilegal &gt;40 ammo (RIFLE, SLC, DE) (15000$ + 40 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="12000" data-sanksi="45" data-impound="0" data-persidangan="no"><label>5.3 Membawa senjata berat ilegal &lt;50 (AK47, SG, UZI) (12000$ + 45 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="20000" data-sanksi="55" data-impound="0" data-persidangan="no"><label>5.4 Membawa senjata berat ilegal &gt;50 (AK47, SG, UZI) (20000$ + 55 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="20000" data-sanksi="40" data-impound="0" data-persidangan="no"><label>5.5 Melindungi penjahat/narapidana (DPO) (20000$ + 40 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="25000" data-sanksi="50" data-impound="0" data-persidangan="no"><label>5.6 Membantu penjahat untuk keluar dari penjara (25000$ + 50 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="0" data-sanksi="0" data-impound="0" data-persidangan="yes"><label>5.7 Melakukan pembunuhan berencana (Persidangan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="10000" data-sanksi="20" data-impound="0" data-persidangan="no"><label>5.8 Penyanderaan terhadap warga (10000$ + 20 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="15000" data-sanksi="30" data-impound="0" data-persidangan="no"><label>5.9 Penyanderaan terhadap instansi (15000$ + 30 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="12000" data-sanksi="25" data-impound="0" data-persidangan="no"><label>5.10 Penembakan terhadap warga (12000$ + 25 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="18000" data-sanksi="35" data-impound="0" data-persidangan="no"><label>5.11 Penembakan terhadap instansi (18000$ + 35 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="20000" data-sanksi="45" data-impound="0" data-persidangan="no"><label>5.12 Peperangan antar kelompok (20000$ + 45 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="15000" data-sanksi="20" data-impound="0" data-persidangan="no"><label>5.13 Pembegalan terhadap warga (15000$ + 20 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="20000" data-sanksi="25" data-impound="0" data-persidangan="no"><label>5.14 Pembegalan terhadap instansi (20000$ + 25 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="12000" data-sanksi="20" data-impound="0" data-persidangan="no"><label>5.15 Mengancam seseorang menggunakan senjata (12000$ + 20 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="30000" data-sanksi="40" data-impound="0" data-persidangan="no"><label>5.16 Berada di tempat crafting persenjataan (30000$ + 40 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="35000" data-sanksi="60" data-impound="0" data-persidangan="no"><label>5.17 Mengganggu jelanya peleburan senjata (35000$ + 60 bulan)</label></div>
-<div class="pelanggaran"><input type="checkbox" data-denda="40000" data-sanksi="80" data-impound="0" data-persidangan="no"><label>5.18 Mengganggu pengisian STOGS bahan persenjataan FAF (40000$ + 80 bulan)</label></div>
+            <div class="form-section bg-teal-50/30">
+                <h3 class="text-md font-bold text-teal-800 mb-3 flex items-center gap-2"><i class="fas fa-pills"></i> Lab & Penatalaksanaan</h3>
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <div>
+                        <label class="label-title">Hb (g/dL)</label>
+                        <input type="number" step="0.1" id="hb" class="input-field" placeholder="Mis: 11.5">
+                    </div>
+                    <div>
+                        <label class="label-title">Pemberian Fe</label>
+                        <input type="text" id="fe" class="input-field" placeholder="Mis: 30 tablet">
+                    </div>
+                </div>
+                <div>
+                    <label class="label-title">Edukasi / Tindakan (P)</label>
+                    <textarea id="edukasi" rows="2" class="input-field resize-none" placeholder="1. Menjelaskan hasil pemeriksaan..."></textarea>
+                </div>
+            </div>
 
+            <div class="p-5 bg-white flex gap-3">
+                <button type="button" onclick="resetForm()" class="w-1/3 py-3 rounded-lg border border-slate-300 text-slate-600 font-bold hover:bg-slate-50 transition">Reset</button>
+                <button type="button" onclick="generateSOAP()" class="w-2/3 py-3 rounded-lg bg-teal-600 text-white font-bold hover:bg-teal-700 transition flex justify-center items-center gap-2">
+                    <i class="fas fa-notes-medical"></i> Buat SOAP
+                </button>
+            </div>
+        </form>
 
-    <div class="button-container">
-      <button type="button" onclick="hitungTotal()">Hitung Total</button>
-      <button type="button" onclick="resetForm()">Reset</button>
-    </div>
-  </form>
+        <div id="soapCard" class="hidden mt-5 mb-10 bg-white p-5 rounded-xl shadow-md border-l-4 border-teal-600 relative">
+            <button onclick="copyToClipboard()" class="absolute top-4 right-4 text-slate-400 hover:text-teal-600 transition p-2 bg-slate-100 rounded-md" title="Copy Text">
+                <i class="fas fa-copy"></i>
+            </button>
+            <h3 class="font-bold text-lg mb-3 border-b pb-2 text-teal-800">DOKUMENTASI SOAP</h3>
+            <pre id="soapText" class="font-mono text-sm text-slate-700 whitespace-pre-wrap leading-relaxed"></pre>
+            <div id="copyAlert" class="hidden mt-3 text-xs text-center text-green-600 font-bold bg-green-50 p-2 rounded">
+                Teks SOAP berhasil disalin!
+            </div>
+        </div>
+    </main>
 
-  <div class="total" id="hasilTotal">Total Denda: $0 | Total Sanksi: 0 bulan | Total Impound: 0 hari | Persidangan: Tidak</div>
+    <script>
+        // --- 1. OTOMATISASI HPHT -> HPL & USIA KEHAMILAN ---
+        document.getElementById('hpht').addEventListener('change', hitungKehamilan);
 
-<script>
-  function hitungTotal() {
-    const checkboxes = document.querySelectorAll('#formPelanggaran input[type="checkbox"]');
-    let totalDenda = 0;
-    let totalSanksi = 0;
-    let totalImpound = 0;
-    let butuhPersidangan = false;
-    let pasalTerpilih = [];
+        function hitungKehamilan() {
+            const hphtVal = document.getElementById('hpht').value;
+            if(!hphtVal) return;
 
-    checkboxes.forEach((box) => {
-      if (box.checked) {
-        totalDenda += parseInt(box.dataset.denda);
-        totalSanksi += parseInt(box.dataset.sanksi);
-        totalImpound += parseInt(box.dataset.impound);
-        if (box.dataset.persidangan === "yes") {
-          butuhPersidangan = true;
+            const hpht = new Date(hphtVal);
+            const today = new Date();
+            
+            // Hitung HPL (Naegele)
+            let hpl = new Date(hpht);
+            hpl.setDate(hpl.getDate() + 7);
+            if (hpht.getMonth() <= 2) { 
+                hpl.setMonth(hpl.getMonth() + 9);
+            } else {
+                hpl.setMonth(hpl.getMonth() - 3);
+                hpl.setFullYear(hpl.getFullYear() + 1);
+            }
+            
+            // Hitung Usia Kehamilan (Minggu & Hari)
+            const diffTime = Math.abs(today - hpht);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
+            const weeks = Math.floor(diffDays / 7);
+            const days = diffDays % 7;
+
+            // Jika HPHT lebih dari hari ini, set 0
+            if(today < hpht) {
+                document.getElementById('hpl-result').textContent = "-";
+                document.getElementById('uk-result').textContent = "HPHT tidak valid";
+                return;
+            }
+
+            document.getElementById('hpl-result').textContent = hpl.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('uk-result').textContent = `${weeks} Minggu ${days} Hari`;
         }
-        const label = box.nextElementSibling.innerText;
-        pasalTerpilih.push(label);
-      }
-    });
 
-    let hasil = `Total Denda: $${totalDenda} | Total Sanksi: ${totalSanksi} bulan | Total Impound: ${totalImpound} hari | Persidangan: ${butuhPersidangan ? 'Ya' : 'Tidak'}`;
-    
-    if (pasalTerpilih.length > 0) {
-      hasil += `<br><br><strong>Pasal yang Dipilih:</strong><br>` + pasalTerpilih.map(p => `- ${p}`).join('<br>');
-    }
+        // --- 2. OTOMATISASI TENSIMETER (DETEKSI HIPERTENSI) ---
+        function cekTensi() {
+            const sys = parseInt(document.getElementById('sistolik').value);
+            const dia = parseInt(document.getElementById('diastolik').value);
+            const statusDiv = document.getElementById('td-status');
 
-    document.getElementById('hasilTotal').innerHTML = hasil;
-  }
+            if(sys && dia) {
+                if(sys >= 140 || dia >= 90) {
+                    statusDiv.innerHTML = '<span class="text-red-500 font-bold"><i class="fas fa-exclamation-triangle"></i> Waspada Hipertensi/PE</span>';
+                } else if(sys < 90 || dia < 60) {
+                    statusDiv.innerHTML = '<span class="text-orange-500 font-bold">Hipotensi</span>';
+                } else {
+                    statusDiv.innerHTML = '<span class="text-teal-600 font-bold"><i class="fas fa-check-circle"></i> Normal</span>';
+                }
+            } else {
+                statusDiv.innerHTML = '';
+            }
+        }
+        document.getElementById('sistolik').addEventListener('input', cekTensi);
+        document.getElementById('diastolik').addEventListener('input', cekTensi);
 
-  function resetForm() {
-    const checkboxes = document.querySelectorAll('#formPelanggaran input[type="checkbox"]');
-    checkboxes.forEach((box) => box.checked = false);
-    document.getElementById('hasilTotal').innerHTML = 'Total Denda: $0 | Total Sanksi: 0 bulan | Total Impound: 0 hari | Persidangan: Tidak';
-  }
-</script>
+        // --- 3. OTOMATISASI ANTROPOMETRI (IMT & LILA) ---
+        function cekGizi() {
+            const bb = parseFloat(document.getElementById('bb').value);
+            const tb = parseFloat(document.getElementById('tb').value);
+            const lila = parseFloat(document.getElementById('lila').value);
+            
+            let imtText = "";
+            let lilaText = "";
+
+            if(bb && tb) {
+                const tbM = tb / 100;
+                const imt = (bb / (tbM * tbM)).toFixed(1);
+                imtText = `IMT: ${imt}`;
+            }
+
+            if(lila) {
+                if(lila < 23.5) {
+                    lilaText = '<span class="text-red-500 font-bold"><i class="fas fa-exclamation-circle"></i> Risiko KEK</span>';
+                } else {
+                    lilaText = '<span class="text-teal-600">LILA Normal</span>';
+                }
+            }
+
+            document.getElementById('imt-status').innerHTML = imtText;
+            document.getElementById('lila-status').innerHTML = lilaText;
+        }
+        document.getElementById('bb').addEventListener('input', cekGizi);
+        document.getElementById('tb').addEventListener('input', cekGizi);
+        document.getElementById('lila').addEventListener('input', cekGizi);
+
+        // --- 4. OTOMATISASI TBJ (Rumus Johnson-Toshach) ---
+        function hitungTBJ() {
+            const tfu = parseFloat(document.getElementById('tfu').value);
+            const pap = parseFloat(document.getElementById('pap').value); // 11 atau 12
+            
+            if(tfu) {
+                let tbj = (tfu - pap) * 155;
+                if(tbj < 0) tbj = 0; // Prevent negative
+                document.getElementById('tbj').value = tbj.toFixed(0);
+            } else {
+                document.getElementById('tbj').value = "";
+            }
+        }
+        document.getElementById('tfu').addEventListener('input', hitungTBJ);
+        document.getElementById('pap').addEventListener('change', hitungTBJ);
+
+        // --- 5. GENERATE SOAP ---
+        function generateSOAP() {
+            // Ambil Data
+            const val = (id) => document.getElementById(id).value || '-';
+            
+            const ukText = document.getElementById('uk-result').textContent;
+            const hplText = document.getElementById('hpl-result').textContent;
+
+            // Tanggal Pemeriksaan
+            const tglSkrg = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric', hour:'2-digit', minute:'2-digit' });
+
+            const soap = `DOKUMENTASI ASUHAN KEBIDANAN (ANC)
+Tanggal/Jam: ${tglSkrg} WIB
+
+[SUBJEKTIF]
+Nama     : Ny. ${val('nama')} (Umur: ${val('umur')} th)
+Keluhan  : ${val('keluhan')}
+Riwayat  : G${val('gravida')} P${val('partus')} A${val('abortus')}
+HPHT     : ${val('hpht')}
+
+[OBJEKTIF]
+KU: Baik, Kesadaran: Composmentis
+TTV  : TD ${val('sistolik')}/${val('diastolik')} mmHg | N: ${val('nadi')} x/m | S: ${val('suhu')} C
+Fisik: BB ${val('bb')} kg | TB ${val('tb')} cm | LILA ${val('lila')} cm
+Status Obstetrik:
+- TFU        : ${val('tfu')} cm
+- Presentasi : ${val('presentasi')}
+- Letak      : ${document.getElementById('pap').options[document.getElementById('pap').selectedIndex].text}
+- DJJ        : ${val('djj')} x/menit
+- TBJ        : ${val('tbj')} gram
+Lab  : Hb ${val('hb')} g/dL
+
+[ANALISA]
+G${val('gravida')}P${val('partus')}A${val('abortus')}, Usia Kehamilan ${ukText}, Janin Tunggal Hidup Intrauterine.
+HPL: ${hplText}
+
+[PENATALAKSANAAN]
+1. Menginformasikan hasil pemeriksaan kepada ibu.
+2. Memberikan terapi Fe: ${val('fe')}.
+3. ${val('edukasi') || 'Memberikan edukasi gizi dan tanda bahaya kehamilan.'}
+`;
+
+            document.getElementById('soapText').textContent = soap;
+            document.getElementById('soapCard').classList.remove('hidden');
+        }
+
+        // --- 6. COPY TO CLIPBOARD ---
+        function copyToClipboard() {
+            const textToCopy = document.getElementById('soapText').textContent;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const alert = document.getElementById('copyAlert');
+                alert.classList.remove('hidden');
+                setTimeout(() => { alert.classList.add('hidden'); }, 3000);
+            });
+        }
+
+        function resetForm() {
+            document.getElementById('ancForm').reset();
+            document.getElementById('hpl-result').textContent = '-';
+            document.getElementById('uk-result').textContent = '-';
+            document.getElementById('td-status').innerHTML = '';
+            document.getElementById('imt-status').innerHTML = '';
+            document.getElementById('lila-status').innerHTML = '';
+            document.getElementById('soapCard').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
