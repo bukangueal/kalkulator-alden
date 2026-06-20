@@ -1,3 +1,15 @@
+Jujur saja, versi sebelumnya belum lengkap. Versi yang tadi baru mencakup *basic* sesuai yang Anda sebutkan di awal.
+Jika kita bicara tentang aplikasi ANC yang **benar-benar lengkap dan sesuai standar kebidanan (Standar 10T)**, kita harus memasukkan elemen pengkajian lanjutan agar bisa langsung dipakai untuk membuat dokumentasi SOAP kebidanan.
+Berikut adalah fitur tambahan yang saya masukkan ke dalam kode versi "Lengkap" ini:
+ * **Usia Kehamilan Otomatis:** Dihitung dari HPHT hingga hari ini (dalam format Minggu & Hari).
+ * **Tanda-Tanda Vital (TTV):** Input Tekanan Darah dengan deteksi otomatis risiko Hipertensi/Preeklampsia.
+ * **Pemeriksaan Kebidanan:** Input TFU (Tinggi Fundus Uteri) dan deteksi otomatis **Taksiran Berat Janin (TBJ)** menggunakan rumus Johnson-Toshach.
+ * **Kondisi Janin:** Input DJJ (Denyut Jantung Janin) dan Presentasi.
+ * **Terapi & Lab:** Catatan Tablet Tambah Darah (Fe) dan hasil Cek Hb.
+ * **Tombol Copy to Clipboard:** Ringkasan otomatis disusun rapi dengan format SOAP (Subjektif, Objektif, Analisa, Penatalaksanaan) yang bisa langsung di-copy ke WhatsApp atau sistem rekam medis RS/Klinik.
+### Kode index.html (Versi Full ANC & SOAP)
+Silakan timpa (replace) seluruh kode sebelumnya di GitHub dengan kode di bawah ini:
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -367,3 +379,5 @@ HPL: ${hplText}
     </script>
 </body>
 </html>
+
+```
